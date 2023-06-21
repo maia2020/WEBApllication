@@ -1,0 +1,210 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Kanit', sans-serif;
+  font-family: 'Sen', sans-serif;
+}
+
+.google-symbol::before {
+      font-family: "Material Symbols Outlined";
+      content: "\ea35";  
+      display: inline-block;
+      margin-right: 5px; 
+      color: #05c8cf;
+      font-size: 45px;
+}
+
+.header {
+  min-height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.9)), url(lyon.avif);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+
+.sub-header {
+  height: 40vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.9)), url(lyon.avif);
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+
+nav {
+  display: flex;
+  padding: 1% 6%;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+nav img {
+  width: 200px;
+}
+
+.nav-links {
+  flex: 1;
+  text-align: right;
+}
+
+.nav-links ul li {
+  list-style: none;
+  display: inline-block;
+  padding: 8px 12px;
+  position: relative;
+}
+
+.nav-links ul li a {
+  color: #046e74;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.nav-links ul li::after {
+  content: '';
+  width: 0%;
+  height: 2px;
+  background: #046e74;
+  display: block;
+  margin: auto;
+  transition: 0.5s;
+}
+
+.nav-links ul li:hover::after {
+  width: 100%;
+}
+
+.text-box {
+  width: 90%;
+  color: #ffffff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.text-box h1 {
+  font-size: 62px;
+}
+
+.text-box p {
+  margin: 10px 0 40px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.hero-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  font-family: 'Kanit', sans-serif;
+  font: bold;
+  border: 2px solid #fff;
+  padding: 12px 34px;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  cursor: pointer;
+}
+
+.hero-btn:hover {
+  border: 2px solid #046e74;
+  background: #046e74;
+  transition: 1s;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1% 6%;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#map {
+  min-width: 20vw;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+
+}
+
+/*---------------Deuxième Page ------------------*/
+#map { height: 400px; width: 600px; }
+
+#position-courbe {
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+.carte{
+    width: 80%;
+    margin: auto;
+    text-align: center;
+    padding-top: 100px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5));
+  }
+
+
+.map-text {
+  clear: both; 
+  margin-top: 80px; 
+}
+
+
+#divDate1 {
+  position: absolute;
+  left: 720px;
+  top:  1060px;
+}
+#divDate2 {
+  position: absolute;
+  left: 1020px;
+  top: 1060px;
+}
+
+.menu1{
+  position: absolute;
+  left: 320px;
+  top: 260px;
+  color: #ffffff;
+}
+
+.text-box2 {
+  width: 90%;
+  color: #ffffff;
+  position: absolute;
+
+  transform: translate(-50%, -50%);
+  left: 800px;
+  top: 160px;
+  font-size: 22px;
+}
+
+.deuxiemeMenu1{
+  position: absolute;
+  left: 320px;
+  top: 280px;
+  color: #ffffff;
+}
+
+
+.affichage-map {
+  display: flex;
+  flex-direction: row;
+}
+
+.reponse {
+  width: 60vw;
+  position: absolute;
+  left: 470px;
+  top: 1150px;
+}

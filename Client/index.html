@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesure AURA</title>
+    <link rel="stylesheet" type="text/css" href="leaflet.css" />
+    <link rel="stylesheet" href="style[1].css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,400;0,500;1,200;1,400;1,500&family=Sen:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <meta charset="UTF-8">   
+</head>
+<script src="leaflet.js"> // insertion bibliothèque Leaflet : http://leafletjs.com/ </script>
+<body>
+    <section class="header">
+        <nav>
+            <a href="https://www.atmo-auvergnerhonealpes.fr"><span class="google-symbol"></span><img src="logo.png"></a>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="">HOME</a></li>
+                    <li><a href="https://www.atmo-auvergnerhonealpes.fr">ABOUT US</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="text-box">
+            <h1>Mesure de la pollution atmosphérique en AURA</h1>
+            <p>Faitez défiler la page pour trouver la Carte Glissante AURA ou cliquez sur le bouton pour comparer les stations AURA.</p>
+            
+            <a href="deux.html" class="hero-btn">Comparaisons</a>
+        </div>
+
+
+    </section>
+
+
+    <section class="carte">
+        <h1> Carte Glissante </h1>
+        <p> Le réseau ATMO Auvergne-Rhône-Alpes existe depuis 2016 mais les premières mesures de polluants atmosphériques remontent aux années 1960. ATMO les mesure et le suivi de la pollution atmosphérique sur le territoire de la Région Auvergne-Rhône-Alpes et est constitué de 96 stations de mesure. Ce réseau mesure la concentration de plusieurs polluants : particules fines, monoxyde et dioxyde de carbone, benzène, oxydes d’azote, etc. 
+        Ici, nous vous proposons des graphiques présentant l'évolution de la concentration de plusieurspolluants tels que les particules fines, le dioxyde de carbone, le benzène ou les oxydes d’azote,  sur une période à choisir entre le 05/12/2021 et le 06/12/2022.
+        <br>
+
+    </p>
+            
+
+
+        <body onload="load_data()">  <!-- Récupération des données avec le chargement de la page -->
+        
+        
+        
+            <!-- <label><span>Région :</span><input id="region" name="Region"> 
+            <button id="bouton">Afficher la courbe</button>  </label>  -->
+             
+        
+
+            <div class="affichage-map">
+                <!-- <label><span>Région :</span><input id="region" name="Region"> 
+                <button id="bouton">Afficher la courbe</button>  </label>  -->
+                <div id="map"></div> 
+        
+                <div class="reponse" id="reponse">
+                <p align="center"></p>
+                <img width="90%" src="" />
+                </div>
+            </div>
+            <div class="map-text">
+                <nav>
+                    <a href="https://www.atmo-auvergnerhonealpes.fr"><span class="google-symbol"></span><img src="logo.png"></a>
+
+                </nav>
+            </div>
+            
+        
+        </div>
+        <div>
+        <!-- choix d'une date de début-->
+        <div id="divDate1">
+        <label for="start">Date de départ:</label>
+        <input type="date" id="start" name="Veuillez choisir une date"
+        value="2021-12-05"
+        min="2021-12-05" max="2022-12-04">
+        </div>
+        <!-- choix d'une date de fin-->
+        <div id="divDate2">
+        <label for="end">Date de fin:</label>
+        <input type="date" id="end" name="Veuillez choisir une date"
+        value="2021-12-06"
+        min="2021-12-06" max="2022-12-05">
+        </div>
+
+        <style>
+            #map { height: 400px; width: 400px; float:left; margin-left:20px; margin-right:20px; margin-top: 100px}
+        </style>
+
+
+    
+    
+</section>
+   
+</body>
+
+
+
+
+
+<script>
+    // Creation d'une carte dans la balise div "map", et positionne la vue sur un point donné et un niveau de zoom
+    var map = L.map('map').setView([46.5,2.5], 5);
+    // Ajout d'une couche de dalles OpenStreetMap
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+         }).addTo(map);
+         
+    function load_data () {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {   // fonction callback
+          // récupération des données renvoyées par le serveur
+          var data = JSON.parse(this.responseText);
+          // boucle sur les enregistrements renvoyés
+          for ( n = 0; n < data.length; n++ ) {
+            // insertion d'un marqueur à la position, attachement d'une popup, capture de l'évènement "clic'
+            L.marker([data[n].lat,data[n].lon]).addTo(map)
+              .bindPopup(data[n].nom)
+              .addEventListener('click',OnMarkerClick)
+              .idreg=data[n].nom;   // propriété personnalisée ajouté au marqueur
+            }
+        };
+        xhr.open('GET','/regions',true);
+        xhr.send();
+    }
+    
+    function OnMarkerClick (e) {
+        var xhr = new XMLHttpRequest();
+        var image =  document.querySelector('#reponse img'),
+            legende = document.querySelector('#reponse p');
+        
+        var start = document.getElementById('start').value,
+            end = document.getElementById('end').value ;
+            xhr.onload = function() {   // fonction callback
+          var data = JSON.parse(this.responseText)
+          image.src = data.img;
+          image.alt = data.title;
+          legende.innerHTML = data.title;
+          };
+        xhr.open('GET','/regularite/'+e.target.idreg+'/'+start+'/'+end,true);  // on récupère la courbe par un appel au serveur
+        xhr.send();
+    }
+    </script>
+    
+    
+    
+</html>

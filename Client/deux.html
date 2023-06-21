@@ -1,0 +1,275 @@
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesure</title>
+    <link rel="stylesheet" type="text/css" href="leaflet.css" />
+    <link rel="stylesheet" href="style[1].css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,200;0,400;0,500;1,200;1,400;1,500&family=Sen:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <meta charset="UTF-8">
+</head>
+<script src="leaflet.js"> // insertion bibliothèque Leaflet : http://leafletjs.com/ </script>
+<body onload="sendRequest()">
+    <section class="header">
+        <nav>
+            <a href="index.html"><span class="google-symbol"></span><img src="logo.png"></a>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="https://www.atmo-auvergnerhonealpes.fr">ABOUT US</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="text-box2">
+            <h2>Comparaison de la mesure de la pollution atmosphérique en AURA</h2>
+            <p>Ici, il vous sera possible de comparer la concentration de plusieurs polluants  par jour sur une année: particules fines, monoxyde et dioxyde de carbone, benzène, oxydes d’azote, etc. entre deux stations de mesure (Point Of Interrest)</p>
+            
+            
+        </div>
+
+
+    
+
+
+        <div id="deuxiemeMenu1">    
+            <style>
+                #deuxiemeMenu1 {
+                    position: absolute;
+                    left: 320px;
+                    top: 280px;
+                    color: #ffffff;
+                }
+            </style>
+            <label>Option de comparaison des 2 POIs:</label>
+        <select id="menu2" onchange="afficherTroisiemeMenu()">
+            <option value="FEYZIN STADE">FEYZIN STADE</option>
+            <option value="A7 SUD LYONNAIS">A7 SUD LYONNAIS</option>
+            <option value="A7 Salaise Ouest">A7 Salaise Ouest</option>
+            <option value="Aiguille du Midi">Aiguille du Midi</option>
+            <option value="Albertville">Albertville</option>
+            <option value="ANNECY Rocade">ANNECY Rocade</option>
+            <option value="ANNEMASSE">ANNEMASSE</option>
+            <option value="Aurillac-Lagarde">Aurillac-Lagarde</option>
+            <option value="Beaulieu">Beaulieu</option>
+            <option value="BOSSONS">BOSSONS</option>
+            <option value="Bourg-en-Bresse">Bourg-en-Bresse</option>
+            <option value="Bourgoin-Jallieu">Bourgoin-Jallieu</option>
+            <option value="Chamalières Europe">Chamalières Europe</option>
+            <option value="CHAMBERY BISSY">CHAMBERY BISSY</option>
+            <option value="CHAMBERY LE HAUT">CHAMBERY LE HAUT</option>
+            <option value="Chambéry Trafic">Chambéry Trafic</option>
+            <option value="CHAMONIX">CHAMONIX</option>
+            <option value="Champ sur Drac">Champ sur Drac</option>
+            <option value="COTIERE AIN">COTIERE AIN</option>
+            <option value="Drôme Rurale Sud-SND">Drôme Rurale Sud-SND</option>
+            <option value="Edouard Michelin">Edouard Michelin</option>
+            <option value="Esplanade Gare">Esplanade Gare</option>
+            <option value="GERLAND">GERLAND</option>
+            <option value="GAILLARD">GAILLARD</option>
+            <option value="Grenoble Boulevards">Grenoble Boulevards</option>
+            <option value="Grenoble Les Frenes">Grenoble Les Frenes</option>
+            <option value="Grenoble PeriurbSud">Grenoble PeriurbSud</option>
+            <option value="Gresivaudan Periurb">Gresivaudan Periurb</option>
+            <option value="HAUT BEAUJOLAIS">HAUT BEAUJOLAIS</option>
+            <option value="Jardin Lecoq">Jardin Lecoq</option>
+            <option value="LA TALAUDIERE">LA TALAUDIERE</option>
+            <option value="Le Casset2">Le Casset2</option>
+            <option value="Le Puy-Causans">Le Puy-Causans</option>
+            <option value="Leclanche">Leclanche</option>
+            <option value="Les_Ancizes">Les_Ancizes</option>
+            <option value="Les Ménuires">Les Ménuires</option>
+            <option value="LOVERCHY">LOVERCHY</option>
+            <option value="Lyon - Tunnel Croix-Rousse - Sortie Rhône">Lyon - Tunnel Croix-Rousse - Sortie Rhône</option>
+            <option value="Lyon Centre">Lyon Centre</option>
+            <option value="Lyon Périphérique">Lyon Périphérique</option>
+            <option value="LYON TRAFIC JAURES">LYON TRAFIC JAURES</option>
+            <option value="Maurienne trafic">Maurienne trafic</option>
+            <option value="Montferrand">Montferrand</option>
+            <option value="Montluçon">Montluçon</option>
+            <option value="Moulins Centre">Moulins Centre</option>
+            <option value="NOVEL">NOVEL</option>
+            <option value="Paray le Fresil">Paray le Fresil</option>
+            <option value="PASSY">PASSY</option>
+            <option value="PASTEUR">PASTEUR</option>
+            <option value="Pays du Mezenc">Pays du Mezenc</option>
+            <option value="Plateau de Bonnevaux">Plateau de Bonnevaux</option>
+            <option value="Rageade">Rageade</option>
+            <option value="Riom Périurbaine">Riom Périurbaine</option>
+            <option value="ROANNE">ROANNE</option>
+            <option value="ROCHES DE CONDRIEU">ROCHES DE CONDRIEU</option>
+            <option value="RocadeSud_Eybens">RocadeSud_Eybens</option>
+            <option value="Romans-sur-Isère">Romans-sur-Isère</option>
+            <option value="RIVE DE GIER">RIVE DE GIER</option>
+            <option value="ROUSSILLON">ROUSSILLON</option>
+            <option value="Royat Périurbaine">Royat Périurbaine</option>
+            <option value="SAINT ETIENNE SUD">SAINT ETIENNE SUD</option>
+            <option value="Saint Bauzile CECA">Saint Bauzile CECA</option>
+            <option value="Saint Germain/Rhône">Saint Germain/Rhône</option>
+            <option value="SAINT-CHAMOND">SAINT-CHAMOND</option>
+            <option value="SAINT JEAN">SAINT JEAN</option>
+            <option value="Sablons">Sablons</option>
+            <option value="Sallanches Régie">Sallanches Régie</option>
+            <option value="SAINT FONS CENTRE">SAINT FONS CENTRE</option>
+            <option value="Saint Martin dHeres">Saint Martin dHeres</option>
+            <option value="SAINT EXUPERY">SAINT EXUPERY</option>
+            <option value="Site autoroutier A71">Site autoroutier A71</option>
+            <option value="Sommet du Puy de Dom">Sommet du Puy de Dom</option>
+            <option value="ST ETIENNE BD URBAIN">ST ETIENNE BD URBAIN</option>
+            <option value="St Germain/Rhône">St Germain/Rhône</option>
+            <option value="ST FONS CENTRE">ST FONS CENTRE</option>
+            <option value="TERNAY">TERNAY</option>
+            <option value="Valence Périurb. Sud">Valence Périurb. Sud</option>
+            <option value="Valence Urb. Centre">Valence Urb. Centre</option>
+            <option value="Vaulx en Velin">Vaulx en Velin</option>
+            <option value="Venissieux Village">Venissieux Village</option>
+            <option value="VERNAISON">VERNAISON</option>
+            <option value="Vichy">Vichy</option>
+            <option value="Voiron Urbain">Voiron Urbain</option>
+                       
+            
+            </select>
+            <select id="menu3" onchange="afficherTroisiemeMenu()">
+                <option value="Grenoble Les Frenes">Grenoble Les Frenes</option>
+                <option value="Aiguille du Midi">Aiguille du Midi</option>
+                <option value="A7 Salaise Ouest">A7 Salaise Ouest</option>
+                <option value="A7 SUD LYONNAIS">A7 SUD LYONNAIS</option>
+                <option value="Albertville">Albertville</option>
+                <option value="ANNECY Rocade">ANNECY Rocade</option>
+                <option value="ANNEMASSE">ANNEMASSE</option>
+                <option value="Aurillac-Lagarde">Aurillac-Lagarde</option>
+                <option value="Beaulieu">Beaulieu</option>
+                <option value="BOSSONS">BOSSONS</option>
+                <option value="Bourg-en-Bresse">Bourg-en-Bresse</option>
+                <option value="Bourgoin-Jallieu">Bourgoin-Jallieu</option>
+                <option value="Chamalières Europe">Chamalières Europe</option>
+                <option value="CHAMBERY BISSY">CHAMBERY BISSY</option>
+                <option value="CHAMBERY LE HAUT">CHAMBERY LE HAUT</option>
+                <option value="Chambéry Trafic">Chambéry Trafic</option>
+                <option value="CHAMONIX">CHAMONIX</option>
+                <option value="Champ sur Drac">Champ sur Drac</option>
+                <option value="COTIERE AIN">COTIERE AIN</option>
+                <option value="Drôme Rurale Sud-SND">Drôme Rurale Sud-SND</option>
+                <option value="Edouard Michelin">Edouard Michelin</option>
+                <option value="Esplanade Gare">Esplanade Gare</option>
+                <option value="FEYZIN STADE">FEYZIN STADE</option>
+                <option value="GERLAND">GERLAND</option>
+                <option value="GAILLARD">GAILLARD</option>
+                <option value="Grenoble Boulevards">Grenoble Boulevards</option>
+                <option value="Grenoble PeriurbSud">Grenoble PeriurbSud</option>
+                <option value="Gresivaudan Periurb">Gresivaudan Periurb</option>
+                <option value="HAUT BEAUJOLAIS">HAUT BEAUJOLAIS</option>
+                <option value="Jardin Lecoq">Jardin Lecoq</option>
+                <option value="LA TALAUDIERE">LA TALAUDIERE</option>
+                <option value="Le Casset2">Le Casset2</option>
+                <option value="Le Puy-Causans">Le Puy-Causans</option>
+                <option value="Leclanche">Leclanche</option>
+                <option value="Les_Ancizes">Les_Ancizes</option>
+                <option value="Les Ménuires">Les Ménuires</option>
+                <option value="LOVERCHY">LOVERCHY</option>
+                <option value="Lyon - Tunnel Croix-Rousse - Sortie Rhône">Lyon - Tunnel Croix-Rousse - Sortie Rhône</option>
+                <option value="Lyon Centre">Lyon Centre</option>
+                <option value="Lyon Périphérique">Lyon Périphérique</option>
+                <option value="LYON TRAFIC JAURES">LYON TRAFIC JAURES</option>
+                <option value="Maurienne trafic">Maurienne trafic</option>
+                <option value="Montferrand">Montferrand</option>
+                <option value="Montluçon">Montluçon</option>
+                <option value="Moulins Centre">Moulins Centre</option>
+                <option value="NOVEL">NOVEL</option>
+                <option value="Paray le Fresil">Paray le Fresil</option>
+                <option value="PASSY">PASSY</option>
+                <option value="PASTEUR">PASTEUR</option>
+                <option value="Pays du Mezenc">Pays du Mezenc</option>
+                <option value="Plateau de Bonnevaux">Plateau de Bonnevaux</option>
+                <option value="Rageade">Rageade</option>
+                <option value="Riom Périurbaine">Riom Périurbaine</option>
+                <option value="ROANNE">ROANNE</option>
+                <option value="ROCHES DE CONDRIEU">ROCHES DE CONDRIEU</option>
+                <option value="RocadeSud_Eybens">RocadeSud_Eybens</option>
+                <option value="Romans-sur-Isère">Romans-sur-Isère</option>
+                <option value="RIVE DE GIER">RIVE DE GIER</option>
+                <option value="ROUSSILLON">ROUSSILLON</option>
+                <option value="Royat Périurbaine">Royat Périurbaine</option>
+                <option value="SAINT ETIENNE SUD">SAINT ETIENNE SUD</option>
+                <option value="Saint Bauzile CECA">Saint Bauzile CECA</option>
+                <option value="Saint Germain/Rhône">Saint Germain/Rhône</option>
+                <option value="SAINT-CHAMOND">SAINT-CHAMOND</option>
+                <option value="SAINT JEAN">SAINT JEAN</option>
+                <option value="Sablons">Sablons</option>
+                <option value="Sallanches Régie">Sallanches Régie</option>
+                <option value="SAINT FONS CENTRE">SAINT FONS CENTRE</option>
+                <option value="Saint Martin dHeres">Saint Martin dHeres</option>
+                <option value="SAINT EXUPERY">SAINT EXUPERY</option>
+                <option value="Site autoroutier A71">Site autoroutier A71</option>
+                <option value="Sommet du Puy de Dom">Sommet du Puy de Dom</option>
+                <option value="ST ETIENNE BD URBAIN">ST ETIENNE BD URBAIN</option>
+                <option value="St Germain/Rhône">St Germain/Rhône</option>
+                <option value="ST FONS CENTRE">ST FONS CENTRE</option>
+                <option value="TERNAY">TERNAY</option>
+                <option value="Valence Périurb. Sud">Valence Périurb. Sud</option>
+                <option value="Valence Urb. Centre">Valence Urb. Centre</option>
+                <option value="Vaulx en Velin">Vaulx en Velin</option>
+                <option value="Venissieux Village">Venissieux Village</option>
+                <option value="VERNAISON">VERNAISON</option>
+                <option value="Vichy">Vichy</option>
+                <option value="Voiron Urbain">Voiron Urbain</option>
+                            
+            > 
+            </select>
+
+            <select id="menu4" onchange="afficherQuatrièmeMenu()">
+                <option value="benzène">benzène</option>
+                <option value="monoxyde de carbone">monoxyde de carbone</option>
+                <option value="monoxyde d'azote">monoxyde d'azote</option>
+                <option value="dioxyde d'azote">dioxyde d'azote</option>
+                <option value="oxydes d'azote">oxydes d'azote</option>
+                <option value="ozone">ozone</option>
+                <option value="particules PM10">particules PM10</option>
+                <option value="particules PM2,5">particules PM2,5</option>
+                <option value="dioxyde de soufre">dioxyde de soufre</option>
+            </select>
+
+            <div id="reponseImage">
+                <img src="" alt="air" id="afficheImg">
+                <p id="titreImage"></p>
+            </div>
+<script>
+    var dropdown1 = document.getElementById("menu2");
+    var dropdown2 = document.getElementById("menu3");
+    var dropdown3 = document.getElementById("menu4");
+
+    var selectedOption1 = dropdown1.options[dropdown1.selectedIndex].value;
+    var selectedOption2 = dropdown2.options[dropdown2.selectedIndex].value;
+    var selectedOption3 = dropdown3.options[dropdown3.selectedIndex].value;
+
+    // Criação do objeto XMLHttpRequest
+    
+    function sendRequest(){
+        var xhr = new XMLHttpRequest();
+
+        // Definição da URL do servidor com as opções selecionadas
+        var url = "/comparasion/" + selectedOption1 + "/" + selectedOption2 + "/" + selectedOption3;
+
+        // Configuração da requisição GET
+        xhr.open('GET', url, true);
+        xhr.send();
+
+        var image =  document.querySelector('#reponseImage img'),
+        legende = document.querySelector('#reponse p');
+        xhr.onload = function() {   // fonction callback
+        var data = JSON.parse(this.responseText)
+        image.src = data.img;
+        image.alt = data.title;
+        legende.innerHTML = data.title;
+        };
+    }
+</script>
+
+
+
+
+
+        
+
+    </section>
